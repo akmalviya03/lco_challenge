@@ -1,32 +1,38 @@
 import 'package:flutter/material.dart';
+import 'splash.dart';
 
-void main() => runApp(LCO());
+void main() {
+  Function done = () {
+    return 1;
+  };
+  Map<int, Widget> op = {1: LCO()};
+  runApp(MaterialApp(
+    theme: ThemeData.dark(),
+    home: SafeArea(
+      child: AnimatedSplash(
+        imagePath: 'images/LCO_transparent.png',
+        home: LCO(),
+        customFunction: done,
+        duration: 2500,
+        type: AnimatedSplashType.BackgroundProcess,
+        outputAndHome: op,
+      ),
+    ),
+  ));
+}
 
 class LCO extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
       home: SafeArea(
         child: Scaffold(
-          body: randomExercises()
+          body: Center(
+            child: Text('Hello'),
           ),
         ),
-    );
-  }
-}
-
-class randomExercises extends StatefulWidget {
-  @override
-  _randomExercisesState createState() => _randomExercisesState();
-}
-
-class _randomExercisesState extends State<randomExercises> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('Hello',),),
+      ),
     );
   }
 }
