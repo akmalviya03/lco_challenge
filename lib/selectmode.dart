@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:lcochallenge/sets.dart';
+import 'listclass.dart';
+import 'package:flutter/services.dart';
 class LCO extends StatefulWidget {
   @override
   _LCOState createState() => _LCOState();
@@ -9,12 +11,11 @@ class LCO extends StatefulWidget {
 class _LCOState extends State<LCO> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Color(0xff212121),
       body: SafeArea(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Expanded(
                 flex: 1,
@@ -44,7 +45,26 @@ class _LCOState extends State<LCO> {
                             ],
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          ListClass listclass_object = new ListClass();
+
+                          List temp = listclass_object
+                              .shuffle_exercise_images_timings();
+                          List<String> exercise_images = temp[0];
+                          List<String> exercise_names = temp[1];
+                          List<int> exercise_timings = temp[2];
+                          List<String> exercise_audio = temp[3];
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => enterSets(
+                                      exercise_images: exercise_images,
+                                      exercise_names: exercise_names,
+                                      exercise_timings: exercise_timings,
+                                      exercise_audio: exercise_audio,
+                                    )),
+                          );
+                        },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
