@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'startexercise.dart';
 
 class enterSets extends StatefulWidget {
   enterSets(
@@ -127,10 +129,19 @@ class _enterSetsState extends State<enterSets> {
                 children: <Widget>[
                   TextField(
                     keyboardType: TextInputType.number,
+                    inputFormatters: [BlacklistingTextInputFormatter(new RegExp('[\\.|\\ |\\-|\\,]')),],
                     controller: myController,
+                    cursorColor: Colors.green,
                     style:
                         TextStyle(color: Color(0xff9E9E9E), letterSpacing: 1.5),
                     decoration: InputDecoration(
+                      hoverColor: Colors.brown,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
                       hintText: 'Number Of Sets You Wants To Do Today.',
                       hintStyle: TextStyle(
                         color: Color(0xff9E9E9E),
@@ -142,7 +153,18 @@ class _enterSetsState extends State<enterSets> {
                     padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
                     child: RawMaterialButton(
                       onPressed: () {
-                        print(double.parse(myController.text).round());
+                        int val = double.parse(myController.text).round();
+                        print(val);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StartExercise(
+                                  exercise_images: widget.exercise_images,
+                                  exercise_names: widget.exercise_names,
+                                  exercise_timings: widget.exercise_timings,
+                                  exercise_audio: widget.exercise_audio,
+                                  sets: val)),
+                        );
                         myController.clear();
                       },
                       child: Padding(

@@ -13,6 +13,7 @@ void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(MaterialApp(
+      theme: ThemeData(textSelectionHandleColor: Colors.green),
       home: Scaffold(
         body: SafeArea(
           child: AnimatedSplash(
