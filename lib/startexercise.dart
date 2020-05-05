@@ -33,7 +33,6 @@ class _StartExerciseState extends State<StartExercise> {
   int exer_sets;
   String exer_name;
   bool buttontoggle = true;
-  int breakTime = 40;
   int min;
   int sec;
   AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
@@ -41,10 +40,11 @@ class _StartExerciseState extends State<StartExercise> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    exer_Time = widget.exercise_timings[0].toString();
+    exer_Time = widget.exercise_timings[0].toString() + ":" + (00).toString();
     exer_img = widget.exercise_images[0];
     exer_sets = 1;
     exer_name = widget.exercise_names[0];
+    assetsAudioPlayer.loop = true;
   }
 
   void update() async {
@@ -53,6 +53,11 @@ class _StartExerciseState extends State<StartExercise> {
         exer_sets = (i + 1);
       });
       while (j < 5) {
+        assetsAudioPlayer.open(
+          Audio(widget.exercise_audio[j]),
+        );
+        assetsAudioPlayer.loop = true;
+        assetsAudioPlayer.play();
         setState(() {
           exer_img = widget.exercise_images[j];
           exer_name = widget.exercise_names[j];
@@ -70,13 +75,15 @@ class _StartExerciseState extends State<StartExercise> {
               })
               ..onDone(() {
                 if (j == 4 && exer_sets == widget.sets) {
+                  assetsAudioPlayer.stop();
                   showDialog(context: context, child: finalScreen());
                 } else {
+                  assetsAudioPlayer.stop();
                   showDialog(context: context, child: BreakDialog());
                 }
               });
         await Future.delayed(
-            Duration(seconds: ((widget.exercise_timings[j]*60) + 40)));
+            Duration(seconds: ((widget.exercise_timings[j] * 60) + 40)));
         j++;
       }
       j = 0;
@@ -146,7 +153,7 @@ class _StartExerciseState extends State<StartExercise> {
                               color: Color(0xff616161),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(80.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Image.asset(
                                 exer_img.toString(),
                               ),
@@ -221,13 +228,18 @@ class _BreakDialogState extends State<BreakDialog> {
       backgroundColor: Colors.transparent,
       body: Center(
         child: Container(
-          decoration: BoxDecoration(color: Color(0xff616161),borderRadius: BorderRadius.all(Radius.circular(20))),
+          decoration: BoxDecoration(
+              color: Color(0xff616161),
+              borderRadius: BorderRadius.all(Radius.circular(20))),
           width: MediaQuery.of(context).size.width * 0.40,
           height: MediaQuery.of(context).size.height * 0.20,
           child: Center(
-            child: Text(
-              val.toString(),
-              style: TextStyle(color: Color(0xff9E9E9E), fontSize: 50),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                val.toString(),
+                style: TextStyle(color: Color(0xff9E9E9E), fontSize: 50),
+              ),
             ),
           ),
         ),
@@ -243,14 +255,29 @@ class finalScreen extends StatelessWidget {
       backgroundColor: Color(0xff212121),
       body: Center(
         child: Container(
-          decoration: BoxDecoration(color: Color(0xff616161),borderRadius: BorderRadius.all(Radius.circular(20))),
-          width: MediaQuery.of(context).size.width * 0.40,
+          decoration: BoxDecoration(
+              color: Color(0xff616161),
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          width: double.infinity,
           height: MediaQuery.of(context).size.height * 0.20,
           child: Center(
-            child: Text(
-              'Thank You',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Color(0xff9E9E9E),fontSize: 50),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Developed By: Abhishak Kumar Malviya',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Color(0xff9E9E9E), fontSize: 26),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Challenged By: Hitesh Choudhary',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Color(0xff9E9E9E), fontSize: 26),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
