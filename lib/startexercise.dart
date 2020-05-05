@@ -57,7 +57,7 @@ class _StartExerciseState extends State<StartExercise> {
           exer_img = widget.exercise_images[j];
           exer_name = widget.exercise_names[j];
         });
-        CountdownTimer(Duration(seconds: widget.exercise_timings[j]),
+        CountdownTimer(Duration(minutes: widget.exercise_timings[j]),
                 Duration(seconds: 1))
             .listen((data) {})
               ..onData((data) {
@@ -76,7 +76,7 @@ class _StartExerciseState extends State<StartExercise> {
                 }
               });
         await Future.delayed(
-            Duration(seconds: ((widget.exercise_timings[j]) + 40)));
+            Duration(seconds: ((widget.exercise_timings[j]*60) + 40)));
         j++;
       }
       j = 0;
