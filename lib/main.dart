@@ -15,15 +15,13 @@ void main() {
     runApp(MaterialApp(
       theme: ThemeData(textSelectionHandleColor: Colors.green),
       home: Scaffold(
-        body: SafeArea(
-          child: AnimatedSplash(
-            imagePath: 'images/LCO_transparent.png',
-            home: LCO(),
-            customFunction: done,
-            duration: 2500,
-            type: AnimatedSplashType.BackgroundProcess,
-            outputAndHome: op,
-          ),
+        body: AnimatedSplash(
+          imagePath: 'images/LCO_transparent.png',
+          home: LCO(),
+          customFunction: done,
+          duration: 2500,
+          type: AnimatedSplashType.BackgroundProcess,
+          outputAndHome: op,
         ),
       ),
     ));

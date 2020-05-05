@@ -154,7 +154,6 @@ class _enterSetsState extends State<enterSets> {
                     child: RawMaterialButton(
                       onPressed: () {
                         int val = double.parse(myController.text).round();
-                        print(val);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
