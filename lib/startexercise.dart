@@ -66,7 +66,6 @@ class _StartExerciseState extends State<StartExercise> {
                 Duration(seconds: 1))
             .listen((data) {})
               ..onData((data) {
-                print(data.elapsed.inSeconds.toString());
                 sec = data.elapsed.inSeconds.remainder(60);
                 min = data.elapsed.inMinutes;
                 setState(() {
