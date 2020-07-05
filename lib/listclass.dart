@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
 
 class ListClass {
-  List<String> _exercise_images = [
+  List<String> _exerciseImages = [
     'images/1.png',
     'images/2.png',
     'images/3.png',
@@ -27,9 +26,9 @@ class ListClass {
     'audio/5.mp3'
   ];
 
-  List<int> _exercise_timing = [2, 3, 4, 5, 3, 2, 4, 3, 2, 3, 4, 5, 1, 3];
+  List<int> _exerciseTiming = [2, 3, 4, 5, 3, 2, 4, 3, 2, 3, 4, 5, 1, 3];
 
-  List<String> _exercise_name = [
+  List<String> _exerciseName = [
     'PUSH-UPS',
     'SIT-UPS',
     'TOE TOUCHING',
@@ -48,24 +47,24 @@ class ListClass {
 
   List shuffle_exercise_images_timings() {
     var random = new Random();
-    int length = _exercise_timing.length;
+    int length = _exerciseTiming.length;
     int start = 0;
     while (length > 1) {
       int pos = random.nextInt(length);
       length--;
-      var tmp1 = _exercise_timing[start + pos];
-      _exercise_timing[start + pos] = _exercise_timing[start + length];
-      _exercise_timing[start + length] = tmp1;
+      var tmp1 = _exerciseTiming[start + pos];
+      _exerciseTiming[start + pos] = _exerciseTiming[start + length];
+      _exerciseTiming[start + length] = tmp1;
 
-      var tmp2 = _exercise_images[start + pos];
-      _exercise_images[start + pos] = _exercise_images[start + length];
-      _exercise_images[start + length] = tmp2;
+      var tmp2 = _exerciseImages[start + pos];
+      _exerciseImages[start + pos] = _exerciseImages[start + length];
+      _exerciseImages[start + length] = tmp2;
 
-      var tmp3 = _exercise_name[start + pos];
-      _exercise_name[start + pos] = _exercise_name[start + length];
-      _exercise_name[start + length] = tmp3;
+      var tmp3 = _exerciseName[start + pos];
+      _exerciseName[start + pos] = _exerciseName[start + length];
+      _exerciseName[start + length] = tmp3;
     }
     _audio.shuffle();
-    return [_exercise_images.sublist(0,5), _exercise_name.sublist(0,5), _exercise_timing.sublist(0,6), _audio];
+    return [_exerciseImages.sublist(0,5), _exerciseName.sublist(0,5), _exerciseTiming.sublist(0,6), _audio];
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lcochallenge/sets.dart';
 import 'listclass.dart';
-import 'package:flutter/services.dart';
 class LCO extends StatefulWidget {
   @override
   _LCOState createState() => _LCOState();
@@ -46,22 +45,22 @@ class _LCOState extends State<LCO> {
                           ),
                         ),
                         onPressed: () {
-                          ListClass listclass_object = new ListClass();
+                          ListClass listClassObject = new ListClass();
 
-                          List temp = listclass_object
+                          List temp = listClassObject
                               .shuffle_exercise_images_timings();
-                          List<String> exercise_images = temp[0];
-                          List<String> exercise_names = temp[1];
-                          List<int> exercise_timings = temp[2];
-                          List<String> exercise_audio = temp[3];
-                          Navigator.push(
+                          List<String> exerciseImages = temp[0];
+                          List<String> exerciseNames = temp[1];
+                          List<int> exerciseTimings = temp[2];
+                          List<String> exerciseAudio = temp[3];
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => enterSets(
-                                      exercise_images: exercise_images,
-                                      exercise_names: exercise_names,
-                                      exercise_timings: exercise_timings,
-                                      exercise_audio: exercise_audio,
+                                builder: (context) => EnterSets(
+                                      exerciseImages: exerciseImages,
+                                      exerciseNames: exerciseNames,
+                                      exerciseTimings: exerciseTimings,
+                                      exerciseAudio: exerciseAudio,
                                     )),
                           );
                         },

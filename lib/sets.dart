@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'startexercise.dart';
 
-class enterSets extends StatefulWidget {
-  enterSets(
-      {@required this.exercise_images,
-      @required this.exercise_names,
-      @required this.exercise_timings,
-      @required this.exercise_audio});
+class EnterSets extends StatefulWidget {
+  EnterSets(
+      {@required this.exerciseImages,
+        @required this.exerciseNames,
+        @required this.exerciseTimings,
+        @required this.exerciseAudio,});
 
-  final List<String> exercise_images;
+  final List<String> exerciseImages;
 
-  final List<String> exercise_names;
+  final List<String> exerciseNames;
 
-  final List<int> exercise_timings;
+  final List<int> exerciseTimings;
 
-  final List<String> exercise_audio;
+  final List<String> exerciseAudio;
 
   @override
-  _enterSetsState createState() => _enterSetsState();
+  _EnterSetsState createState() => _EnterSetsState();
 }
 
-class _enterSetsState extends State<enterSets> {
+class _EnterSetsState extends State<EnterSets> {
   final myController = TextEditingController();
 
   @override
@@ -57,7 +57,7 @@ class _enterSetsState extends State<enterSets> {
                       ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: widget.exercise_images.length,
+                        itemCount: widget.exerciseImages.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -75,7 +75,7 @@ class _enterSetsState extends State<enterSets> {
                                           0, 16, 0, 16),
                                       child: ClipOval(
                                         child: Image.asset(
-                                          widget.exercise_images[index]
+                                          widget.exerciseImages[index]
                                               .toString(),
                                           width: 100,
                                           height: 100,
@@ -90,7 +90,7 @@ class _enterSetsState extends State<enterSets> {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          widget.exercise_names[index]
+                                          widget.exerciseNames[index]
                                               .toString(),
                                           style: TextStyle(
                                             color: Color(0xff9E9E9E),
@@ -103,7 +103,7 @@ class _enterSetsState extends State<enterSets> {
                                           height: 10,
                                         ),
                                         Text(
-                                          widget.exercise_timings[index]
+                                          widget.exerciseTimings[index]
                                                   .toString() +
                                               ' mins',
                                           style: TextStyle(
@@ -154,14 +154,14 @@ class _enterSetsState extends State<enterSets> {
                     child: RawMaterialButton(
                       onPressed: () {
                         int val = double.parse(myController.text).round();
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => StartExercise(
-                                  exercise_images: widget.exercise_images,
-                                  exercise_names: widget.exercise_names,
-                                  exercise_timings: widget.exercise_timings,
-                                  exercise_audio: widget.exercise_audio,
+                                  exerciseImages: widget.exerciseImages,
+                                  exerciseNames: widget.exerciseNames,
+                                  exerciseTimings: widget.exerciseTimings,
+                                  exerciseAudio: widget.exerciseAudio,
                                   sets: val)),
                         );
                         myController.clear();
