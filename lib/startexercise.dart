@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:lcochallenge/BreakDialog.dart';
 import 'package:lcochallenge/aboutDialog.dart';
+
 class StartExercise extends StatefulWidget {
   StartExercise(
       {@required this.exerciseImages,
@@ -34,7 +35,6 @@ class _StartExerciseState extends State<StartExercise>
   AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
 
   AnimationController _animationController;
-  bool _finishExerciseFlag = false;
   String get showExerciseTimer {
     Duration duration =
         _animationController.duration * _animationController.value;
@@ -53,6 +53,14 @@ class _StartExerciseState extends State<StartExercise>
     assetsAudioPlayer.loop = true;
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    assetsAudioPlayer.dispose();
+    _animationController.dispose();
+    super.dispose();
+  }
+
   void update() {
     assetsAudioPlayer.open(Audio(widget.exerciseAudio[exerciseNumber]));
     assetsAudioPlayer.play();
@@ -61,48 +69,43 @@ class _StartExerciseState extends State<StartExercise>
 
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.dismissed) {
-
-        if(_finishExerciseFlag == true) {
-          assetsAudioPlayer.stop();
-          showDialog(context: context,child: finalScreen());
-        }
-        else{
-          setState(() {
-            exerciseNumber++;
-            if(exerciseNumber > widget.exerciseImages.length-1)
-            {
-              exerciseSet = exerciseSet -1;
-              if(exerciseSet == 0) {
-                _finishExerciseFlag = true;
-              }
-              else {
-                exerciseNumber = 0;
-                assetsAudioPlayer.stop();
-                showDialog(context: context,child: BreakDialog()).then((value) {
-                  assetsAudioPlayer.open(Audio(widget.exerciseAudio[exerciseNumber]));
-                  assetsAudioPlayer.play();
-                  assetsAudioPlayer.loop = true;
-                  exerciseImage = widget.exerciseImages[exerciseNumber];
-                  exerciseName = widget.exerciseNames[exerciseNumber];
-                  _animationController.duration = Duration(minutes: widget.exerciseTimings[exerciseNumber]);
-                  _animationController.reverse(from: 1.0);
-                });
-              }
-            }
-            else{
+        setState(() {
+          exerciseNumber++;
+          if (exerciseNumber > widget.exerciseImages.length - 1) {
+            exerciseSet = exerciseSet - 1;
+            if (exerciseSet == 0) {
               assetsAudioPlayer.stop();
-              showDialog(context: context,child: BreakDialog()).then((value) {
-                assetsAudioPlayer.open(Audio(widget.exerciseAudio[exerciseNumber]));
+              showDialog(context: context, child: FinalScreen());
+            } else {
+              exerciseNumber = 0;
+              assetsAudioPlayer.stop();
+              showDialog(context: context, child: BreakDialog()).then((value) {
+                assetsAudioPlayer
+                    .open(Audio(widget.exerciseAudio[exerciseNumber]));
                 assetsAudioPlayer.play();
                 assetsAudioPlayer.loop = true;
                 exerciseImage = widget.exerciseImages[exerciseNumber];
                 exerciseName = widget.exerciseNames[exerciseNumber];
-                _animationController.duration = Duration(minutes: widget.exerciseTimings[exerciseNumber]);
+                _animationController.duration =
+                    Duration(minutes: widget.exerciseTimings[exerciseNumber]);
                 _animationController.reverse(from: 1.0);
               });
             }
-          });
-        }
+          } else {
+            assetsAudioPlayer.stop();
+            showDialog(context: context, child: BreakDialog()).then((value) {
+              assetsAudioPlayer
+                  .open(Audio(widget.exerciseAudio[exerciseNumber]));
+              assetsAudioPlayer.play();
+              assetsAudioPlayer.loop = true;
+              exerciseImage = widget.exerciseImages[exerciseNumber];
+              exerciseName = widget.exerciseNames[exerciseNumber];
+              _animationController.duration =
+                  Duration(minutes: widget.exerciseTimings[exerciseNumber]);
+              _animationController.reverse(from: 1.0);
+            });
+          }
+        });
       }
     });
   }
@@ -219,7 +222,3 @@ class _StartExerciseState extends State<StartExercise>
         ));
   }
 }
-
-
-
-

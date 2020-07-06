@@ -45,7 +45,7 @@ class ListClass {
     'DECLINED CRUNCH'
   ];
 
-  List shuffle_exercise_images_timings() {
+  List shuffleExerciseImagesTimings() {
     var random = new Random();
     int length = _exerciseTiming.length;
     int start = 0;

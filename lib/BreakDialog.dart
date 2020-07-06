@@ -17,7 +17,6 @@ class _BreakDialogState extends State<BreakDialog>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 40));
@@ -27,7 +26,6 @@ class _BreakDialogState extends State<BreakDialog>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _animationController.dispose();
   }

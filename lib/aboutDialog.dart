@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class finalScreen extends StatelessWidget {
+class FinalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

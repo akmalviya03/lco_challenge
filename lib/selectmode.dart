@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:lcochallenge/sets.dart';
-import 'listclass.dart';
+import 'package:lcochallenge/enterSetsRandom.dart';
 class LCO extends StatefulWidget {
   @override
   _LCOState createState() => _LCOState();
@@ -45,23 +44,11 @@ class _LCOState extends State<LCO> {
                           ),
                         ),
                         onPressed: () {
-                          ListClass listClassObject = new ListClass();
-
-                          List temp = listClassObject
-                              .shuffle_exercise_images_timings();
-                          List<String> exerciseImages = temp[0];
-                          List<String> exerciseNames = temp[1];
-                          List<int> exerciseTimings = temp[2];
-                          List<String> exerciseAudio = temp[3];
-                          Navigator.pushReplacement(
+                          
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => EnterSets(
-                                      exerciseImages: exerciseImages,
-                                      exerciseNames: exerciseNames,
-                                      exerciseTimings: exerciseTimings,
-                                      exerciseAudio: exerciseAudio,
-                                    )),
+                                builder: (context) => EnterSetsRandom()),
                           );
                         },
                         shape: RoundedRectangleBorder(
