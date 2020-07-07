@@ -4,7 +4,11 @@ import 'package:flutter/services.dart';
 import 'startexercise.dart';
 import 'package:lcochallenge/listclass.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+
 class EnterSetsRandom extends StatefulWidget {
+
+  EnterSetsRandom({@required this.randomButtonVisibility});
+  final bool randomButtonVisibility;
   @override
   _EnterSetsRandomState createState() => _EnterSetsRandomState();
 }
@@ -16,8 +20,14 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
   List<String> exerciseAudio;
   bool _validate = false;
   ListClass listClassObject;
-  void getData() {
-    List temp = listClassObject.shuffleExerciseImagesTimings();
+  void getExercises() {
+    List temp;
+    if(widget.randomButtonVisibility == true){
+      temp = listClassObject.shuffleExerciseImagesTimings();
+    }
+    else{
+    temp = listClassObject.dayWiseExercises();
+    }
     exerciseImages = temp[0];
     exerciseNames = temp[1];
     exerciseTimings = temp[2];
@@ -28,7 +38,7 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
   void initState() {
     super.initState();
     listClassObject = new ListClass();
-    getData();
+    getExercises();
   }
 
   final myController = TextEditingController();
@@ -205,31 +215,35 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
               ],
             ),
           ),
-          Positioned(bottom: MediaQuery.of(context).size.height*0.13,
-            right: MediaQuery.of(context).size.height*0.02,
-            child: Container(
-              height: MediaQuery.of(context).size.height*0.05,
-              width: MediaQuery.of(context).size.height*0.05,
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.green,
-                      offset: Offset(0.0, 1.0), //(x,y)
-                      blurRadius: 6.0,
-                    ),
-                  ],
-                  color: Color(0xff616161),
-                  shape: BoxShape.circle
-              ),
+          Visibility(
+            visible: widget.randomButtonVisibility,
+            child: Positioned(
+              bottom: MediaQuery.of(context).size.height*0.13,
+              right: MediaQuery.of(context).size.height*0.02,
+              child: Container(
+                height: MediaQuery.of(context).size.height*0.05,
+                width: MediaQuery.of(context).size.height*0.05,
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.green,
+                        offset: Offset(0.0, 1.0), //(x,y)
+                        blurRadius: 6.0,
+                      ),
+                    ],
+                    color: Color(0xff616161),
+                    shape: BoxShape.circle
+                ),
 
-              child: IconButton(
-                color: Color(0xff9E9E9E),
-                onPressed: () {
-                  setState(() {
-                    getData();
-                  });
-                },
-                icon: Icon(FontAwesome.random),
+                child: IconButton(
+                  color: Color(0xff9E9E9E),
+                  onPressed: () {
+                    setState(() {
+                      getExercises();
+                    });
+                  },
+                  icon: Icon(FontAwesome.random),
+                ),
               ),
             ),
           )

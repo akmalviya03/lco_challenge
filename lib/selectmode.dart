@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lcochallenge/enterSetsRandom.dart';
-class LCO extends StatefulWidget {
+class SelectionMode extends StatefulWidget {
   @override
-  _LCOState createState() => _LCOState();
+  _SelectionModeState createState() => _SelectionModeState();
 }
 
-class _LCOState extends State<LCO> {
+class _SelectionModeState extends State<SelectionMode> {
   @override
   Widget build(BuildContext context) {
 
@@ -44,11 +44,10 @@ class _LCOState extends State<LCO> {
                           ),
                         ),
                         onPressed: () {
-                          
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => EnterSetsRandom()),
+                                builder: (context) => EnterSetsRandom(randomButtonVisibility: true,)),
                           );
                         },
                         shape: RoundedRectangleBorder(
@@ -86,7 +85,13 @@ class _LCOState extends State<LCO> {
                             ],
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EnterSetsRandom(randomButtonVisibility: false,)),
+                          );
+                        },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),

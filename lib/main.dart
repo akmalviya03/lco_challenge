@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lcochallenge/splashScreen.dart';
 import 'selectmode.dart';
 import 'package:flutter/services.dart';
 void main() {
@@ -8,7 +9,7 @@ void main() {
     runApp(MaterialApp(
       theme: ThemeData(textSelectionHandleColor: Colors.green),
       home: Scaffold(
-        body: LCO()
+        body: SplashScreen()
       ),
     ));
   });

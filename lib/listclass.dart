@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 class ListClass {
   List<String> _exerciseImages = [
@@ -65,6 +66,49 @@ class ListClass {
       _exerciseName[start + length] = tmp3;
     }
     _audio.shuffle();
-    return [_exerciseImages.sublist(0,5), _exerciseName.sublist(0,5), _exerciseTiming.sublist(0,6), _audio];
+    return [_exerciseImages.sublist(0,5), _exerciseName.sublist(0,5), _exerciseTiming.sublist(0,5), _audio];
+  }
+
+  // ignore: missing_return
+  List dayWiseExercises() {
+    var date = DateTime.now();
+    String dayName = DateFormat('EEEE').format(date);
+    print(DateFormat('EEEE').format(date));
+    _audio.shuffle();
+
+    switch(dayName) {
+      case 'Monday': {
+        return [_exerciseImages.sublist(0,5), _exerciseName.sublist(0,5), _exerciseTiming.sublist(0,5), _audio];
+      }
+      break;
+
+      case 'Tuesday': {
+        return [_exerciseImages.sublist(1,6), _exerciseName.sublist(1,6), _exerciseTiming.sublist(1,6), _audio];
+      }
+      break;
+
+      case 'Wednesday': {
+        return [_exerciseImages.sublist(2,7), _exerciseName.sublist(2,7), _exerciseTiming.sublist(2,7), _audio];
+      }
+      break;
+      case 'Thursday': {
+        return [_exerciseImages.sublist(3,8), _exerciseName.sublist(3,8), _exerciseTiming.sublist(3,8), _audio];
+      }
+      break;
+      case 'Friday': {
+        return [_exerciseImages.sublist(4,9), _exerciseName.sublist(4,9), _exerciseTiming.sublist(4,9), _audio];
+      }
+      break;
+      case 'Saturday': {
+        return [_exerciseImages.sublist(5,10), _exerciseName.sublist(5,10), _exerciseTiming.sublist(5,10), _audio];
+      }
+      break;
+      case 'Sunday': {
+        return  [_exerciseImages.sublist(6,11), _exerciseName.sublist(6,11), _exerciseTiming.sublist(6,11), _audio];
+      }
+      break;
+
+    }
+
   }
 }
