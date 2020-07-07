@@ -1,9 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lcochallenge/selectmode.dart';
-
+import 'package:lcochallenge/Constants.dart';
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -29,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff212121),
+      backgroundColor: kDarkGreyColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

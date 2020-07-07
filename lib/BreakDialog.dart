@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'Constants.dart';
 class BreakDialog extends StatefulWidget {
   @override
   _BreakDialogState createState() => _BreakDialogState();
@@ -37,7 +39,7 @@ class _BreakDialogState extends State<BreakDialog>
       body: Center(
         child: Container(
           decoration: BoxDecoration(
-              color: Color(0xff616161),
+              color: kMediumGreyColor,
               borderRadius: BorderRadius.all(Radius.circular(20))),
           width: MediaQuery.of(context).size.width * 0.40,
           height: MediaQuery.of(context).size.height * 0.20,
@@ -51,7 +53,7 @@ class _BreakDialogState extends State<BreakDialog>
                     'Break Time Left',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Color(0xff9E9E9E),
+                      color: kLightGreyColor,
                       fontSize: 20,
                       letterSpacing: 3,
                     ),
@@ -65,7 +67,7 @@ class _BreakDialogState extends State<BreakDialog>
                         return Text(
                           showDialogTime,
                           style: TextStyle(
-                              color: Color(0xff9E9E9E),
+                              color: kLightGreyColor,
                               fontSize: 26,
                               fontWeight: FontWeight.bold),
                         );

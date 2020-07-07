@@ -4,6 +4,7 @@ import 'package:lcochallenge/BreakDialog.dart';
 import 'package:lcochallenge/aboutDialog.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'Constants.dart';
 
 class StartExercise extends StatefulWidget {
   StartExercise(
@@ -35,8 +36,10 @@ class _StartExerciseState extends State<StartExercise>
   String exerciseName;
   bool buttonToggle = true;
   String pause0rResumeButtonText = "PAUSE";
+
   AudioPlayer _audioPlayer;
   AnimationController _animationController;
+
   String get showExerciseTimer {
     Duration duration =
         _animationController.duration * _animationController.value;
@@ -126,7 +129,7 @@ class _StartExerciseState extends State<StartExercise>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xff212121),
+        backgroundColor: kDarkGreyColor,
         body: SafeArea(
           child: Padding(
               padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -143,7 +146,7 @@ class _StartExerciseState extends State<StartExercise>
                                 'SET-' + exerciseSet.toString(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Color(0xff9E9E9E),
+                                  color: kLightGreyColor,
                                   fontSize: 20,
                                   letterSpacing: 8,
                                 ),
@@ -155,7 +158,7 @@ class _StartExerciseState extends State<StartExercise>
                                 exerciseName,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Color(0xff9E9E9E),
+                                  color: kLightGreyColor,
                                   fontSize: 20,
                                   letterSpacing: 8,
                                 ),
@@ -171,7 +174,7 @@ class _StartExerciseState extends State<StartExercise>
                                       showExerciseTimer,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        color: Color(0xff9E9E9E),
+                                        color: kLightGreyColor,
                                         fontSize: 20,
                                         letterSpacing: 8,
                                       ),
@@ -188,7 +191,7 @@ class _StartExerciseState extends State<StartExercise>
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(30),
                                 ),
-                                color: Color(0xff616161),
+                                color: kMediumGreyColor,
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
@@ -231,7 +234,7 @@ class _StartExerciseState extends State<StartExercise>
                               child: Text(
                                 pause0rResumeButtonText,
                                 style: TextStyle(
-                                    color: Color(0xff9E9E9E),
+                                    color: kLightGreyColor,
                                     fontSize: 20,
                                     letterSpacing: 8),
                               ),
@@ -259,7 +262,7 @@ class _StartExerciseState extends State<StartExercise>
                                 child: Text(
                                   "START",
                                   style: TextStyle(
-                                      color: Color(0xff9E9E9E),
+                                      color: kLightGreyColor,
                                       fontSize: 20,
                                       letterSpacing: 8),
                                 ),

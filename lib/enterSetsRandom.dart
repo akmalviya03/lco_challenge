@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lcochallenge/Constants.dart';
 import 'startexercise.dart';
 import 'package:lcochallenge/listclass.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -47,7 +48,7 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xff212121),
+        backgroundColor: kDarkGreyColor,
         body: Stack(children: [
           Padding(
             padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -67,7 +68,7 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
                             'We Have Selected Some Exercises For You To Keep You Healthy',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Color(0xff9E9E9E),
+                              color: kLightGreyColor,
                               fontSize: 20,
                               letterSpacing: 3.2,
                             ),
@@ -84,7 +85,7 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                color: Color(0xff616161),
+                                color: kMediumGreyColor,
                                 child: Row(
                                   children: <Widget>[
                                     Expanded(
@@ -110,7 +111,7 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
                                           Text(
                                             exerciseNames[index].toString(),
                                             style: TextStyle(
-                                              color: Color(0xff9E9E9E),
+                                              color: kLightGreyColor,
                                               letterSpacing: 8,
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
@@ -123,7 +124,7 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
                                             exerciseTimings[index].toString() +
                                                 ' mins',
                                             style: TextStyle(
-                                                color: Color(0xff9E9E9E),
+                                                color: kLightGreyColor,
                                                 letterSpacing: 8,
                                                 fontSize: 14),
                                           )
@@ -150,20 +151,19 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
                             new RegExp('[\\.|\\ |\\-|\\,]')),
                       ],
                       controller: myController,
-                      cursorColor: Colors.green,
+                      cursorColor: kGreenColor,
                       style: TextStyle(
-                          color: Color(0xff9E9E9E), letterSpacing: 1.5),
+                          color: kLightGreyColor, letterSpacing: 1.5),
                       decoration: InputDecoration(
-                        hoverColor: Colors.brown,
                         enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green),
+                          borderSide: BorderSide(color: kGreenColor),
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green),
+                          borderSide: BorderSide(color: kGreenColor),
                         ),
                         hintText: 'Number Of Sets You Wants To Do Today.',
                         hintStyle: TextStyle(
-                          color: Color(0xff9E9E9E),
+                          color: kLightGreyColor,
                           letterSpacing: 1.5,
                         ),
                         errorText:
@@ -202,7 +202,7 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
                           child: Text(
                             'CONFIRM',
                             style: TextStyle(
-                                color: Color(0xff9E9E9E),
+                                color: kLightGreyColor,
                                 fontSize: 20,
                                 letterSpacing: 8),
                           ),
@@ -226,17 +226,17 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.green,
+                        color: kGreenColor,
                         offset: Offset(0.0, 1.0), //(x,y)
                         blurRadius: 6.0,
                       ),
                     ],
-                    color: Color(0xff616161),
+                    color: kMediumGreyColor,
                     shape: BoxShape.circle
                 ),
 
                 child: IconButton(
-                  color: Color(0xff9E9E9E),
+                  color: kLightGreyColor,
                   onPressed: () {
                     setState(() {
                       getExercises();
