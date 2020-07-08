@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'Constants.dart';
 import 'enterSetsRandom.dart';
 
+//Extracted widget named SelectionButton, which is getting utilised in selectionModeScreen.
+// This helps to reduce line of codes and improve code execution Speed.
 class SelectionButton extends StatelessWidget {
   SelectionButton({@required this.imagePath,@required this.buttonText,@required this.randomButtonVisibility});
 
-  final String imagePath;final String buttonText;
+  final String imagePath;
+  final String buttonText;
 
   final bool randomButtonVisibility;
 

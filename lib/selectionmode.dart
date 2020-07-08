@@ -10,7 +10,6 @@ class SelectionMode extends StatefulWidget {
 class _SelectionModeState extends State<SelectionMode> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: kDarkGreyColor,
       body: SafeArea(

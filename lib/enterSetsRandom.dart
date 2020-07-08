@@ -46,10 +46,10 @@ class _EnterSetsRandomState extends State<EnterSetsRandom> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: kDarkGreyColor,
-        body: Stack(children: [
+    return Scaffold(
+      backgroundColor: kDarkGreyColor,
+      body: SafeArea(
+        child: Stack(children: [
           Padding(
             padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
             child: Column(

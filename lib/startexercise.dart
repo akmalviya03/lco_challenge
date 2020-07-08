@@ -143,7 +143,7 @@ class _StartExerciseState extends State<StartExercise>
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
                               child: Text(
-                                'SET-' + exerciseSet.toString(),
+                                'SETS LEFT-' + exerciseSet.toString(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: kLightGreyColor,

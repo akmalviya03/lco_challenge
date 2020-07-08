@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lcochallenge/selectmode.dart';
+import 'package:lcochallenge/selectionmode.dart';
 import 'package:lcochallenge/Constants.dart';
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,12 +11,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     startTime();
   }
   startTime() async {
     var _duration = new Duration(seconds: 3);
+    //After Three seconds SplashScreen Will be replaced with the SelectionModeScreen.
     return new Timer(_duration, navigationPage);
   }
 
@@ -30,12 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: kDarkGreyColor,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset('images/LCO_transparent.png'),
-          ],
-        ),
+        child: Image.asset('images/LCO_transparent.png'),
       ),
     );
   }
