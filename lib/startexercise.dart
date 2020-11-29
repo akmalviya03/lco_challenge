@@ -29,7 +29,7 @@ class StartExercise extends StatefulWidget {
 }
 
 class _StartExerciseState extends State<StartExercise>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   int exerciseNumber = 0;
   String exerciseImage;
   int exerciseSet;
@@ -49,6 +49,7 @@ class _StartExerciseState extends State<StartExercise>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _animationController = AnimationController(
         vsync: this,
         duration: Duration(minutes: widget.exerciseTimings[exerciseNumber]));
@@ -58,40 +59,60 @@ class _StartExerciseState extends State<StartExercise>
   }
 
   @override
+  void deactivate() {
+    stopMusic();
+    super.deactivate();
+  }
+  @override
   void dispose() {
-    // TODO: implement dispose
+    WidgetsBinding.instance.removeObserver(this);
     _audioPlayer.dispose();
     _animationController.dispose();
     super.dispose();
   }
 
-  Future<void> update() async {
-    playMusic(exerciseNumber);
-
-      _animationController.reverse(from: 1.0);
-
-      _animationController.addStatusListener((status) {
-        if (status == AnimationStatus.dismissed) {
-          exerciseNumber++;
-          if (exerciseNumber > widget.exerciseImages.length - 1) {
-            exerciseSet = exerciseSet - 1;
-            if (exerciseSet == 0) {
-              stopMusic();
-              showDialog(context: context, child: FinalScreen());
-            } else {
-              exerciseNumber = 0;
-              breakAndResume(exerciseNumber);
-            }
-          } else {
-            breakAndResume(exerciseNumber);
-          }
-        }
-      });
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state == AppLifecycleState.resumed){
+      resumeMusic();
+    }else if(state == AppLifecycleState.paused){
+      pauseMusic();
+    }
   }
 
-  void breakAndResume(int exerciseNumber){
+  Future<void> update() async {
+    playMusic(exerciseNumber);
+    _animationController.reverse(from: 1.0);
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.dismissed) {
+        exerciseNumber++;
+        if (exerciseNumber > widget.exerciseImages.length - 1) {
+          exerciseSet = exerciseSet - 1;
+          if (exerciseSet == 0) {
+            stopMusic();
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return FinalScreen();
+                });
+          } else {
+            exerciseNumber = 0;
+            breakAndResume(exerciseNumber);
+          }
+        } else {
+          breakAndResume(exerciseNumber);
+        }
+      }
+    });
+  }
+
+  void breakAndResume(int exerciseNumber) {
     stopMusic();
-    showDialog(context: context, child: BreakDialog()).then((value) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return BreakDialog();
+        }).then((value) {
       playMusic(exerciseNumber);
       setState(() {
         exerciseImage = widget.exerciseImages[exerciseNumber];
@@ -102,12 +123,14 @@ class _StartExerciseState extends State<StartExercise>
       _animationController.reverse(from: 1.0);
     });
   }
+
   static void monitorNotificationStateHandler(AudioPlayerState value) {
     print("state => $value");
   }
 
   Future playMusic(int exerciseNumber) async {
-    _audioPlayer = await AudioCache().loop(widget.exerciseAudio[exerciseNumber]);
+    _audioPlayer =
+        await AudioCache().loop(widget.exerciseAudio[exerciseNumber]);
     if (Platform.isIOS) {
       _audioPlayer
           .monitorNotificationStateChanges(monitorNotificationStateHandler);
@@ -217,8 +240,7 @@ class _StartExerciseState extends State<StartExercise>
                                   pauseMusic();
                                   pause0rResumeButtonText = "RESUME";
                                 });
-                              }
-                              else{
+                              } else {
                                 setState(() {
                                   _animationController.reverse(
                                       from: _animationController.value == 0.0
